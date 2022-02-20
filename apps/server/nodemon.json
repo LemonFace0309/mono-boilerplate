@@ -1,0 +1,7 @@
+{
+	"exec": "yarn run build && node build/index.js",
+	"verbose": "false",
+	"watch": ["src"],
+	"ignoreRoot": [],
+	"ext": ".js,.jsx,.ts,.tsx,.json,.graphql"
+}
