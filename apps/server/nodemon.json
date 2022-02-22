@@ -1,7 +1,0 @@
-{
-	"exec": "rm -rf dist && yarn build && nodemon ./dist/src/index.js",
-	"verbose": "false",
-	"watch": ["src"],
-	"ignoreRoot": [],
-	"ext": ".js,.jsx,.ts,.tsx,.json,.graphql"
-}
