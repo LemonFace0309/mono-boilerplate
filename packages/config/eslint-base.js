@@ -1,27 +1,17 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  env: {
-    browser: true,
-    node: true,
-  },
+  plugins: ['@typescript-eslint', 'import'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    'plugin:prettier/recommended',
-    'prettier/@typescript-eslint',
+    'prettier',
   ],
-  settings: {
-    next: {
-      rootDir: ['apps/*/', 'packages/*/'],
-    },
-  },
   rules: {
     // eslint:recommended
     'no-console': ['warn', { allow: ['error'] }],
-    '@next/next/no-html-link-for-pages': 'off',
 
     // plugin:import
     'import/named': 'off',
@@ -42,4 +32,33 @@ module.exports = {
     // prettier
     'prettier/prettier': ['error', { endOfLine: 'auto' }, { usePrettierrc: true }],
   },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      alias: {
+        extensions,
+        project: ['tsconfig.json', 'package/tsconfig.json'],
+      },
+      typescript: {
+        alwaysTryTypes: true,
+        project: ['tsconfig.json', 'package/tsconfig.json'],
+      },
+    },
+  },
+  overrides: [
+    {
+      env: {
+        jest: true,
+      },
+      files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+      extends: ['plugin:jest/recommended'],
+      rules: {
+        'import/no-extraneous-dependencies': ['off', { devDependencies: ['**/?(*.)+(spec|test).[jt]s?(x)'] }],
+        '@typescript-eslint/no-explicit-any': 'off',
+      },
+    },
+  ],
+  ignorePatterns: ['node_modules', '.turbo', '__generated__/**/*', '**/*.d.ts'],
 };
