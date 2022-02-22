@@ -1,14 +1,9 @@
 module.exports = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'import'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
-    'prettier',
-  ],
+  env: {
+    node: true,
+  },
+  plugins: ['@typescript-eslint', 'import', 'simple-import-sort'],
+  extends: ['eslint:recommended', 'plugin:import/recommended', 'plugin:import/typescript', 'prettier'],
   rules: {
     // eslint:recommended
     'no-console': ['warn', { allow: ['error'] }],
@@ -16,34 +11,22 @@ module.exports = {
     // plugin:import
     'import/named': 'off',
 
-    // plugin:typescript-eslint
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-empty-function': 'off',
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
-      {
-        ignoreRestSiblings: true,
-        argsIgnorePattern: '^(_|unused)',
-        varsIgnorePattern: '^(_|unused|React)',
-      },
-    ],
-
-    // prettier
-    'prettier/prettier': ['error', { endOfLine: 'auto' }, { usePrettierrc: true }],
+    // simple-import-sort
+    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': 'error',
   },
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
-      alias: {
-        extensions,
-        project: ['tsconfig.json', 'package/tsconfig.json'],
+      node: {
+        extensions: ['.graphql', '.js', '.jsx', '.svg', '.ts', '.tsx'],
+        paths: ['.', 'node_modules', 'src'],
       },
       typescript: {
         alwaysTryTypes: true,
-        project: ['tsconfig.json', 'package/tsconfig.json'],
+        project: ['packages/*/tsconfig.json', 'apps/*/tsconfig.json', 'apps/*/tsconfig.lint.json'],
       },
     },
   },
@@ -57,6 +40,24 @@ module.exports = {
       rules: {
         'import/no-extraneous-dependencies': ['off', { devDependencies: ['**/?(*.)+(spec|test).[jt]s?(x)'] }],
         '@typescript-eslint/no-explicit-any': 'off',
+      },
+    },
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+      rules: {
+        // plugin:typescript-eslint
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'warn',
+          {
+            ignoreRestSiblings: true,
+            argsIgnorePattern: '^(_|unused)',
+            varsIgnorePattern: '^(_|unused|React)',
+          },
+        ],
       },
     },
   ],

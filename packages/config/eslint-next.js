@@ -1,19 +1,38 @@
 module.exports = {
-  extends: ['./eslintrc-base.js', 'plugin:tailwind/recommended', 'next'],
-  env: {
-    browser: true,
-  },
   parserOptions: {
     ecmaFeatures: { jsx: true },
   },
-  plugins: ['import-alias', 'import-name', 'simple-import-sort'],
+  env: {
+    browser: true,
+    node: true,
+  },
+  plugins: ['@typescript-eslint', 'import', 'simple-import-sort', 'import-name'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:tailwind/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'next',
+    'prettier',
+  ],
   rules: {
-    '@next/next/no-html-link-for-pages': 'off',
+    // eslint:recommended
+    'no-console': ['warn', { allow: ['error'] }],
 
-    'import-alias/import-alias': ['warn', { relativeDepth: 2, rootDir: resolve(rootDir) }],
+    // plugin:import
+    'import/named': 'off',
+
+    // simple-import-sort
+    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': 'error',
+
+    '@next/next/no-html-link-for-pages': 'off',
 
     'import-name/default-import-name': ['error', { classnames: 'cx' }],
 
+    // react
     'react/jsx-key': 'error',
     'react/jsx-no-target-blank': 'warn',
     'react/no-deprecated': 'warn',
@@ -28,20 +47,65 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-
-    'simple-import-sort/exports': 'error',
-    'simple-import-sort/imports': 'error',
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+      },
+    ],
   },
   settings: {
     next: {
       rootDir: ['apps/*/', 'packages/*/'],
     },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.graphql', '.js', '.jsx', '.svg', '.ts', '.tsx'],
+        paths: ['.', 'node_modules', 'src'],
+      },
+      typescript: {
+        alwaysTryTypes: true,
+        project: ['packages/*/tsconfig.json', 'apps/*/tsconfig.json', 'apps/*/tsconfig.lint.json'],
+      },
+    },
   },
   overrides: [
+    {
+      env: {
+        jest: true,
+      },
+      files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+      extends: ['plugin:jest/recommended'],
+      rules: {
+        'import/no-extraneous-dependencies': ['off', { devDependencies: ['**/?(*.)+(spec|test).[jt]s?(x)'] }],
+        '@typescript-eslint/no-explicit-any': 'off',
+      },
+    },
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+      rules: {
+        // plugin:typescript-eslint
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'warn',
+          {
+            ignoreRestSiblings: true,
+            argsIgnorePattern: '^(_|unused)',
+            varsIgnorePattern: '^(_|unused|React)',
+          },
+        ],
+      },
+    },
     {
       files: ['*.tsx', '*.ts'],
       rules: { complexity: ['error', 16] },
     },
   ],
-  ignorePatterns: ['.next', 'public'],
+  ignorePatterns: ['node_modules', '.next', 'public', '.turbo', '__generated__/**/*', '**/*.d.ts'],
 };

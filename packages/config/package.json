@@ -18,7 +18,6 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-graphql": "^4.0.0",
     "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-import-alias": "^1.2.0",
     "eslint-plugin-import-name": "^1.2.3",
     "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-node": "^11.1.0",
