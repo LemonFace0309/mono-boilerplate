@@ -1,5 +1,5 @@
 {
-	"exec": "yarn run build && node build/index.js",
+	"exec": "rm -rf dist && yarn build && nodemon ./dist/src/index.js",
 	"verbose": "false",
 	"watch": ["src"],
 	"ignoreRoot": [],

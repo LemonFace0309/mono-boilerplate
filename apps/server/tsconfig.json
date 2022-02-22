@@ -1,3 +1,10 @@
 {
-  "extends": "tsconfig/base.json",
+  "extends": "tsconfig/server.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "include": ["src/"],
+  "exclude": ["node_modules", ".turbo", "coverage", "dist", "src/**/*.test.ts"]
 }
