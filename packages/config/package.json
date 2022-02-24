@@ -4,7 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "files": [
-    "eslint-base.js",
     "eslint-next.js",
     "eslint-server.js"
   ],
