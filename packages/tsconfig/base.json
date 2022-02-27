@@ -1,23 +1,24 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"display": "Default",
-	"compilerOptions": {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
     "allowJs": true,
-		"composite": false,
-		"declaration": true,
-		"declarationMap": true,
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "incremental": true,
-		"inlineSources": false,
-		"isolatedModules": true,
+    "inlineSources": false,
+    "isolatedModules": true,
     "module": "esnext",
-		"moduleResolution": "node",
-		"noUnusedLocals": false,
-		"noUnusedParameters": false,
-		"preserveWatchOutput": true,
-		"resolveJsonModule": true,
-		"skipLibCheck": true,
-		"strict": true
-	}
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "typeRoots": ["node_modules/@types"]
+  }
 }
