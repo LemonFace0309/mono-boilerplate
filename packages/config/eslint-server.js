@@ -61,5 +61,5 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['node_modules', 'dist', '.turbo', '__generated__/**/*', '**/*.d.ts'],
+  ignorePatterns: ['node_modules', 'dist', '.turbo', 'coverage', '__generated__/**/*', '**/*.d.ts'],
 };

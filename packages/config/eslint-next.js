@@ -78,7 +78,7 @@ module.exports = {
         jest: true,
       },
       files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
-      extends: ['plugin:jest/recommended'],
+      extends: ['plugin:testing-library/react', 'plugin:jest/recommended'],
       rules: {
         'import/no-extraneous-dependencies': ['off', { devDependencies: ['**/?(*.)+(spec|test).[jt]s?(x)'] }],
         '@typescript-eslint/no-explicit-any': 'off',
@@ -107,5 +107,5 @@ module.exports = {
       rules: { complexity: ['error', 16] },
     },
   ],
-  ignorePatterns: ['node_modules', '.next', 'public', '.turbo', '__generated__/**/*', '**/*.d.ts'],
+  ignorePatterns: ['node_modules', '.next', 'public', '.turbo', 'coverage', '__generated__/**/*', '**/*.d.ts'],
 };
