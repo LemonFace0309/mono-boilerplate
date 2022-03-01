@@ -1,7 +1,5 @@
-const base = require('../../jest.config');
-
 module.exports = {
-  ...base,
+  ...require('config/jest-next'),
   name: 'web',
   displayName: 'Web Tests',
 };
